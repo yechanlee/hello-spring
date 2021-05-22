@@ -1,5 +1,6 @@
 package hello.hellospring.service;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
@@ -29,11 +30,20 @@ public class MemberService {
      */
     public Long join(Member member){
 
+        long start = System.currentTimeMillis();
         // optional 로 한번에 만들때는 컨트롤 알트 브이 누르면 된다.
         //컨트롤 알트 m 눌러서 extract method 해주고
-        validateDuplicateMember(member);
-        memberRepository.save(member);
-        return member.getId();
+
+        try{
+            validateDuplicateMember(member);
+            memberRepository.save(member);
+            return member.getId();
+        } finally{
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join = " + timeMs + "ms");
+        }
+
 
     }
 
