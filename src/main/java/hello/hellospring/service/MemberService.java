@@ -5,12 +5,14 @@ import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 // 컨트롤 쉬프트 T 누르면 테스트 만들 수 있음.
 
 //@Service
+@Transactional
 public class MemberService {
 
     private final MemberRepository memberRepository;

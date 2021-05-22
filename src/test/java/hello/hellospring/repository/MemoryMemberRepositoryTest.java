@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MemoryMemberRepositoryTest {
 
     MemoryMemberRepository repository = new MemoryMemberRepository();
-    MemberService service2 = new MemberService();
+    MemberService service2 = new MemberService(repository);
     //하나 끝날때마다 저장소나 공용데이터를 지워줘야한다.
     @AfterEach
     public void afterEach(){
